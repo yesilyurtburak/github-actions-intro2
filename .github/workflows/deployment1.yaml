@@ -1,0 +1,21 @@
+name: Deployment Exercise 1
+on: push
+# I used 1 job in this workflow.
+jobs:
+  deploy-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      # No need to install nodejs since it is already installed on Ubuntu.
+      - name: Install dependencies
+        run: npm ci # uses exact dependency versions (alternative for npm install)
+      - name: Lint
+        run: npm run lint
+      - name: Test code
+        run: npm run test
+      - name: Build code
+        run: npm run build
+      - name: Deploy code
+        run: echo "Deploying..."
+
